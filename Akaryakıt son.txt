@@ -1,0 +1,288 @@
+/******************************************************************************
+*******************************************************************************/
+using System;
+using System.Xml;
+
+class HelloWorld
+{
+    static public char karar;
+
+    static void Main()
+    {
+
+        double benzinFiyatı = 19.67;
+        double dizelFiyatı = 22.11;
+        double LPGFiyatı = 10.89;
+
+
+        double alınanBenzin = 0;
+        double alınanDizel = 0;
+        double alınanLPG = 0;
+
+        double benzinLitre = 10000;
+        double dizelLitre = 10000;
+        double LPGLitre = 10000;
+
+
+        while (true)
+        {
+            
+            Console.WriteLine("Kullanıcı Adı: ");
+            string kullanıcıAdı= Console.ReadLine();
+            Console.WriteLine("Şifrenizi giriniz :");
+            string şifre = Console.ReadLine();
+            
+            
+            if( kullanıcıAdı== "Osman Mert"  && şifre =="12345")
+            {
+                menü();
+                string seçim = Console.ReadLine();
+                
+                
+                 switch (seçim)
+            {
+                case "1":
+
+                    Console.Clear();
+                    Console.WriteLine("Akaryakıt Fiyat Listesi");
+                    Console.WriteLine("Benzin Fiyatı " + benzinFiyatı + "TL/Litre");
+                    Console.WriteLine("Dizel Fiyatı " + dizelFiyatı + "TL/Litre");
+                    Console.WriteLine("LPG Fiyatı " + LPGFiyatı + "TL/Litre");
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+
+
+
+                    bitiş();
+
+
+                    break;
+
+
+                case "2":
+                    Console.Clear();
+                    Console.WriteLine("Hangi akaryakıt türünün fiyatını güncellemek istiyorsunuz");
+                    Console.WriteLine("Benzin=B, Dizel=D, LPG =L");
+
+                    string yakıt;
+                    yakıt = Console.ReadLine();
+
+
+                    if (yakıt == "B" || yakıt == "b")
+                    {
+                        Console.WriteLine("Benzinin yeni fiyatını giriniz:");
+                        benzinFiyatı = Convert.ToDouble(Console.ReadLine());
+                    }
+                    else if (yakıt == "D" || yakıt == "d")
+                    {
+                        Console.WriteLine("Dizelin yeni fiyatını giriniz:");
+                        dizelFiyatı = Convert.ToDouble(Console.ReadLine());
+
+
+                    }
+                    else if (yakıt == "L" || yakıt == "l")
+                    {
+                        Console.WriteLine("LPG nin yeni fiyatını giriniz:");
+                        LPGFiyatı = Convert.ToDouble(Console.ReadLine());
+                    }
+                    else
+                    {
+                        Console.WriteLine("Hatalı seçim yaptınız. Lütfen geçerli bir tuş giriniz.");
+                    }
+
+
+                    bitiş();
+
+
+
+                    break;
+
+                case "3":
+
+                    Console.Clear();
+                    Console.WriteLine("Hangi akaryakıttan almak istiyorsunuz");
+                    Console.WriteLine("Benzin=B, Dizel=D, LPG =L");
+
+
+                    string akaryakıt;
+                    akaryakıt = Console.ReadLine();
+
+                    if (akaryakıt == "B" || akaryakıt == "b")
+                    {
+                        Console.WriteLine("Kaç litre benzin almak istersiniz:");
+                        alınanBenzin = Convert.ToDouble(Console.ReadLine());
+
+                        if (alınanBenzin > benzinLitre)
+                        { Console.WriteLine("Depoda yeteri miktarda benzin yok"); }
+                        else
+                        {
+                            Console.WriteLine(alınanBenzin + "litre benzin aldınız");
+                            benzinLitre = benzinLitre - alınanBenzin;
+                        }
+                    }
+                    else if (akaryakıt == "D" || akaryakıt == "d")
+                    {
+                        Console.WriteLine("Kaç litre dizel almak istersiniz:");
+                        alınanDizel = Convert.ToDouble(Console.ReadLine());
+
+                        if (alınanDizel > dizelLitre)
+                        { Console.WriteLine("Depoda yeterli miktarda dizel yok "); }
+                        else
+                        {
+                            Console.WriteLine(alınanDizel + "litre dizel aldınız");
+                            dizelLitre = dizelLitre - alınanDizel;
+                        }
+
+                    }
+                    else if (akaryakıt == "L" || akaryakıt == "l")
+                    {
+                        Console.WriteLine("Kaç litre LPG almak istersiniz:");
+                        alınanLPG = Convert.ToDouble(Console.ReadLine());
+
+                        if (alınanLPG > LPGLitre)
+                        {
+                            Console.WriteLine("Depoda yeteri miktarda LPG yok");
+                        }
+                        else
+                        {
+                            Console.WriteLine(alınanLPG + "litre LPG aldınız");
+                            LPGLitre = LPGLitre - alınanLPG;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Hatalı seçim yaptınız. Lütfen geçerli bir tuş giriniz.");
+                    }
+
+                    bitiş();
+
+
+
+
+                    break;
+
+                case "4"://depo durumu
+
+                    Console.Clear();
+                    Console.WriteLine("Depo Durumu: ");
+
+                    Console.WriteLine("Kalan Benzin" + benzinLitre);
+                    Console.WriteLine("Kalan Dizel" + dizelLitre);
+                    Console.WriteLine("Kalan LPG" + LPGLitre);
+
+
+                    bitiş();
+
+
+
+
+                    break;
+
+
+                case "5":
+                    Console.Clear();
+                    Console.WriteLine("Toplam satışlar gösteriliyor...");
+                    Console.WriteLine("Benzin toplam satış: " + (10000 - benzinLitre));
+                    Console.WriteLine("Dizel toplam satış: " + (10000 - dizelLitre));
+                    Console.WriteLine("LPG toplam satış: " + (10000 - LPGLitre));
+
+
+                    bitiş();
+
+
+
+                    break;
+
+
+                case "6":
+                    Console.Clear();
+                    Console.WriteLine(("Benzin kazancı") + ((10000 - benzinLitre) * benzinFiyatı));
+                    Console.WriteLine(("Dizel Kazancı") + ((10000 - dizelLitre) * dizelFiyatı));
+                    Console.WriteLine(("LPG kazancı") + ((10000 - LPGLitre) * LPGFiyatı));
+                    Console.WriteLine(("Toplam satış kazancı") + (((10000 - benzinLitre) * benzinFiyatı) + ((10000 - dizelLitre) * dizelFiyatı) + ((10000 - LPGLitre) * LPGFiyatı)));
+
+                    bitiş();
+
+
+
+                    break;
+
+
+                case "7":
+
+                    Console.Clear();
+                    Console.Clear();
+                    Console.WriteLine("Sistemden çıkış yapılıyor...");
+                    Console.WriteLine("İyi günler dileriz...");
+                    break;
+            }
+
+
+                
+                
+                
+            }
+            
+            else 
+            {
+                Console.WriteLine("kullanıcı adı veya parola hatalı. Lütfen tekrar deneyiniz");
+            }
+            
+            
+        }
+
+
+    }
+
+
+
+    static void menü()
+    {
+        Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("                 ***********Akaryakıt Satış Takip Sistemine Hoşgeldiniz***********");
+        Console.WriteLine("                                Ne yapmak istiyorsunuz?");
+        Console.WriteLine("                                1-Birim Fiyat Gösterimi");
+        Console.WriteLine("                                2-Birim Fiyatı Güncelleme");
+        Console.WriteLine("                                3-Akaryakıt Satısı Yap");
+        Console.WriteLine("                                4-Depo Durumunu Goster");
+        Console.WriteLine("                                5-Toplam Satısları Goster");
+        Console.WriteLine("                                6-Kazancı göster");
+        Console.WriteLine("                                7-Çıkıs");
+        Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("Lutfen ne yapmak istediğinizi giriniz. ");
+
+
+    }
+
+    static void bitiş()
+    {
+
+        Console.WriteLine();
+        Console.WriteLine("Ne yapmak istersiniz? (Menü: M, Exit:E)  ");
+        karar = Convert.ToChar(Console.ReadLine());
+        if (karar == 'M' || karar == 'm')
+        {
+            menü();
+        }
+
+        else if (karar == 'E' || karar == 'e')
+        {
+            Console.Clear();
+            Console.WriteLine("Çıkış yapılıyor...");
+
+        }
+
+        else
+        {
+            Console.WriteLine("Lütfen geçerli bir değer giriniz.");
+        }
+    }
+
+
+
+
+}
+
+
